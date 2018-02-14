@@ -1,19 +1,23 @@
 #include "bulk.h"
 
-void bulk::subscribe(std::shared_ptr<observer> obs)
+void bulk::attach_observer(std::shared_ptr<observer> obs)
 {
-  subs.push_back(obs);
+  m_observers.push_back(obs);
 }
 
 void bulk::process_cmd()
 {
-  notify();
+  notify_observers();
 }
 
-void bulk::notify()
+void bulk::notify_observers()
 {
-  for (auto s : subs)
+  for (auto s : m_observers)
   {
     s->update();
   }
+}
+
+void bulk::update()
+{
 }

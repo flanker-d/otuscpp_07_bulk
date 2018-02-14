@@ -1,19 +1,25 @@
-#include <iostream>
+#include "interpreter.h"
 #include "bulk.h"
 #include "logger.h"
 #include "executor.h"
 
-int main(int, char *[])
+int main(int argc, char *argv[])
 {
-  std::shared_ptr<bulk> bulk_ptr = std::make_shared<bulk>();
+  if(argc == 2)
+  {
+    int block_size = std::stoi(argv[1]);
 
-  std::shared_ptr<logger> logger_ptr = std::make_shared<logger>();
-  logger_ptr->set_bulk(bulk_ptr);
+    std::shared_ptr<interpreter> interpreter_ptr = std::make_shared<interpreter>(block_size);
+    std::shared_ptr<bulk> bulk_ptr = std::make_shared<bulk>();
+    std::shared_ptr<logger> logger_ptr = std::make_shared<logger>();
+    std::shared_ptr<executor> executor_ptr = std::make_shared<executor>();
 
-  std::shared_ptr<executor> executor_ptr = std::make_shared<executor>();
-  executor_ptr->set_bulk(bulk_ptr);
+    interpreter_ptr->attach_observer(bulk_ptr);
+    bulk_ptr->attach_observer(logger_ptr);
+    bulk_ptr->attach_observer(executor_ptr);
 
-  bulk_ptr->process_cmd();
+    interpreter_ptr->run();
+  }
 
   return 0;
 }

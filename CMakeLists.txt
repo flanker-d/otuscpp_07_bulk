@@ -6,7 +6,14 @@ include_directories (${PROJECT_SOURCE_DIR})
 
 configure_file(version.h.in version.h)
 
-add_executable(bulk bulk.cpp executor.cpp logger.cpp observer.cpp main.cpp)
+add_executable(bulk
+    bulk.cpp
+    executor.cpp
+    logger.cpp
+    interpreter.cpp
+    main.cpp
+    observer/observer.cpp
+    observer/subject.cpp)
 
 set_target_properties(bulk PROPERTIES
   CXX_STANDARD 14
