@@ -5,9 +5,9 @@ executor::executor()
 {
 }
 
-void executor::update()
+void executor::update(const std::string& cmd)
 {
-  std::cout << "executor:" << std::endl;
+  std::cout << "executor:" << cmd << std::endl;
 }
 
 

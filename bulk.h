@@ -12,8 +12,9 @@ class bulk
     void attach_observer(std::shared_ptr<observer> obs) override;
     void process_cmd();
     void notify_observers() override;
-    void update() override;
+    void update(const std::string& cmd) override;
 
   private:
     std::vector<std::shared_ptr<observer>> m_observers;
+    std::string m_commands_pipe;
 };

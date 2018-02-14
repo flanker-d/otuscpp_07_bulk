@@ -7,5 +7,5 @@ class logger : public observer
 {
   public:
     logger();
-    void update() override;
+    void update(const std::string& cmd) override;
 };

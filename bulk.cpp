@@ -1,4 +1,5 @@
 #include "bulk.h"
+#include <iostream>
 
 void bulk::attach_observer(std::shared_ptr<observer> obs)
 {
@@ -14,10 +15,12 @@ void bulk::notify_observers()
 {
   for (auto s : m_observers)
   {
-    s->update();
+    s->update(m_commands_pipe);
   }
 }
 
-void bulk::update()
+void bulk::update(const std::string& cmd)
 {
+  std::cout << "bulk: " << cmd << std::endl;
+  m_commands_pipe = std::move(cmd);
 }

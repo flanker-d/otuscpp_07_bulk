@@ -5,7 +5,7 @@ logger::logger()
 {
 }
 
-void logger::update()
+void logger::update(const std::string& cmd)
 {
-  std::cout << "logger:" << std::endl;
+  std::cout << "logger:" << cmd << std::endl;
 }

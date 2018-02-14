@@ -9,5 +9,5 @@ class observer
     : public std::enable_shared_from_this<observer>
 {
   public:
-    virtual void update() = 0;
+    virtual void update(const std::string& cmd) = 0;
 };

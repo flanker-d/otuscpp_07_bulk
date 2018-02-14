@@ -7,5 +7,5 @@ class executor : public observer
 {
   public:
     executor();
-    void update() override;
+    void update(const std::string& cmd) override;
 };
