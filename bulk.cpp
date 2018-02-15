@@ -13,9 +13,8 @@ bulk::bulk(int block_size)
 void bulk::run()
 {
   std::string command;
-  while(true)
+  while(std::getline(std::cin, command))
   {
-    std::getline(std::cin, command);
     m_interpreter->process_cmd(command);
   }
 }
