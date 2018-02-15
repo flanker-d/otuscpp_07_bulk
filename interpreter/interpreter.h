@@ -12,10 +12,10 @@ class interpreter
     interpreter(int block_size);
     void process_cmd(const std::string& cmd);
 
-    void change_state(std::shared_ptr<cmd_handler> state_handler);
+    void change_state(const std::shared_ptr<cmd_handler>& state_handler);
     const int& block_size() const;
 
-    void attach_observer(std::shared_ptr<observer> obs) override;
+    void attach_observer(const std::shared_ptr<observer>& obs) override;
     void notify_observers(const std::string& commands_pipeline) override;
     void run();
 
@@ -25,5 +25,5 @@ class interpreter
   private:
     std::vector<std::shared_ptr<observer>> m_observers;
     int m_block_size;
-    std::unique_ptr<cmd_handler> m_cmd_handler;
+    std::shared_ptr<cmd_handler> m_cmd_handler;
 };
