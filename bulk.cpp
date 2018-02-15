@@ -1,26 +1,21 @@
 #include "bulk.h"
 #include <iostream>
 
-void bulk::attach_observer(std::shared_ptr<observer> obs)
+bulk::bulk(int block_size)
+  : m_interpreter(std::make_shared<interpreter>(block_size))
+  , m_logger(std::make_shared<logger>())
+  , m_executor(std::make_shared<executor>())
 {
-  m_observers.push_back(obs);
+  m_interpreter->attach_observer(m_logger);
+  m_interpreter->attach_observer(m_executor);
 }
 
-void bulk::process_cmd()
+void bulk::run()
 {
-  notify_observers();
-}
-
-void bulk::notify_observers()
-{
-  for (auto s : m_observers)
+  std::string command;
+  while(true)
   {
-    s->update(m_commands_pipe);
+    std::getline(std::cin, command);
+    m_interpreter->process_cmd(command);
   }
-}
-
-void bulk::update(const std::string& cmd)
-{
-  std::cout << "bulk: " << cmd << std::endl;
-  m_commands_pipe = std::move(cmd);
 }

@@ -1,7 +1,6 @@
 #pragma once 
 
 #include <observer/observer.h>
-#include <bulk.h>
 
 class logger : public observer
 {

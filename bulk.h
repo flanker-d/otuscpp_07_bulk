@@ -1,20 +1,18 @@
 #pragma once
 
-#include <observer/subject.h>
-#include <observer/observer.h>
-#include <vector>
+#include <interpreter/interpreter.h>
+#include <logger.h>
+#include <executor.h>
 
 class bulk
-    : public subject
-    , public observer
 {
   public:
-    void attach_observer(std::shared_ptr<observer> obs) override;
-    void process_cmd();
-    void notify_observers() override;
-    void update(const std::string& cmd) override;
+    bulk(int block_size);
+
+    void run();
 
   private:
-    std::vector<std::shared_ptr<observer>> m_observers;
-    std::string m_commands_pipe;
+    std::shared_ptr<interpreter> m_interpreter;
+    std::shared_ptr<logger> m_logger;
+    std::shared_ptr<executor> m_executor;
 };

@@ -10,7 +10,10 @@ add_executable(bulk
     bulk.cpp
     executor.cpp
     logger.cpp
-    interpreter.cpp
+    interpreter/interpreter.cpp
+    interpreter/cmd_handler.cpp
+    interpreter/braces_handler.cpp
+    interpreter/simple_cmd_handler.cpp
     main.cpp
     observer/observer.cpp
     observer/subject.cpp)
