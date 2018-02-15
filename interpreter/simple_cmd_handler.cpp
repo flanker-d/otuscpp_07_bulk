@@ -7,16 +7,20 @@ void simple_cmd_handler::process_cmd(const std::string& cmd, const std::shared_p
   if(cmd == "{")
   {
     if(m_commands_pipeline.size() > 0)
-      ipr_ptr->notify_observers(utils::make_cmd_pipeline(m_commands_pipeline));
+      ipr_ptr->notify_commands_observers(utils::make_cmd_pipeline(m_commands_pipeline));
 
     ipr_ptr->change_state(std::make_shared<braces_handler>());
+    ipr_ptr->notify_time_observers(std::time(nullptr));
   }
   else
   {
+    if(m_commands_pipeline.size() == 0)
+      ipr_ptr->notify_time_observers(std::time(nullptr));
+
     m_commands_pipeline.push_back(cmd);
     if(m_commands_pipeline.size() == ipr_ptr->block_size())
     {
-      ipr_ptr->notify_observers(utils::make_cmd_pipeline(m_commands_pipeline));
+      ipr_ptr->notify_commands_observers(utils::make_cmd_pipeline(m_commands_pipeline));
       m_commands_pipeline.clear();
     }
   }

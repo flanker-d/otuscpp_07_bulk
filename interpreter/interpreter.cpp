@@ -23,18 +23,24 @@ const int&interpreter::block_size() const
   return m_block_size;
 }
 
-void interpreter::attach_observer(const std::shared_ptr<observer>& obs)
+void interpreter::attach_commands_observer(const std::shared_ptr<commands_observer>& obs)
 {
-  m_observers.push_back(obs);
+  m_cmd_observers.push_back(obs);
 }
 
-void interpreter::notify_observers(const std::string& commands_pipeline)
+void interpreter::notify_commands_observers(const std::string& commands_pipeline)
 {
-  for(auto obs : m_observers)
-    obs->update(commands_pipeline);
+  for(auto obs : m_cmd_observers)
+    obs->update_commands_observer(commands_pipeline);
 }
 
-void interpreter::run()
+void interpreter::attach_time_observer(const std::shared_ptr<time_observer>& obs)
 {
+  m_time_observers.push_back(obs);
+}
 
+void interpreter::notify_time_observers(const time_t& time)
+{
+  for(auto obs : m_time_observers)
+    obs->update_time_observer(time);
 }

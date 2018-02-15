@@ -1,13 +1,7 @@
-#include "executor.h"
+#include <executor.h>
 #include <iostream>
 
-executor::executor()
+void executor::update_commands_observer(const std::string& cmd)
 {
+  std::cout << "bulk: " << cmd << std::endl;
 }
-
-void executor::update(const std::string& cmd)
-{
-  std::cout << "executor:" << cmd << std::endl;
-}
-
-

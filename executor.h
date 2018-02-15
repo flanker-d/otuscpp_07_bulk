@@ -2,9 +2,9 @@
 
 #include <observer/observer.h>
 
-class executor : public observer
+class executor
+    : public commands_observer
 {
   public:
-    executor();
-    void update(const std::string& cmd) override;
+    void update_commands_observer(const std::string& cmd) override;
 };
