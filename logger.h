@@ -12,8 +12,8 @@ class logger
     void update_time_observer(const std::time_t& time) override;
 
   private:
-    std::string get_new_filename(const time_t& time);
+    std::string get_new_filename();
 
   private:
-    std::ofstream m_output_file;
+    time_t m_time;
 };
