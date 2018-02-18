@@ -25,5 +25,3 @@ void braces_handler::process_cmd(const std::string& cmd, const std::shared_ptr<i
     m_open_braces_count = 0;
   }
 }
-
-
