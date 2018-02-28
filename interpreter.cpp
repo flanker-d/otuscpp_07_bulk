@@ -42,9 +42,9 @@ void interpreter::subscribe(std::shared_ptr<observer> obs)
 void interpreter::process_open_brace()
 {
   m_open_braces_count++;
-  notify();
   if (m_open_braces_count == 1)
   {
+    notify();
     m_commands_storage.init_time();
   }
 }
