@@ -16,6 +16,7 @@ void interpreter::run()
   {
     process_cmd(command);
   }
+  forced_dump();
 }
 
 void interpreter::process_cmd(const std::string &cmd)
@@ -31,6 +32,14 @@ void interpreter::process_cmd(const std::string &cmd)
   else
   {
     process_simple_cmd(cmd);
+  }
+}
+
+void interpreter::forced_dump()
+{
+  if (m_open_braces_count == 0)
+  {
+    notify();
   }
 }
 

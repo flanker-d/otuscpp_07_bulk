@@ -17,6 +17,7 @@ class interpreter
     void run();
 
     void process_cmd(const std::string &cmd);
+    void forced_dump();
 
   private:
     void subscribe(std::shared_ptr<observer> obs);
